@@ -1,15 +1,15 @@
-package com.amazon.Order.service;
+package com.amazon.payment_service.service;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.amazon.Order.Exception.ProductNotFoundException;
-import com.amazon.Order.dto.ProductRequest;
-import com.amazon.Order.dto.ProductResponse;
-import com.amazon.Order.entity.Product;
-import com.amazon.Order.repository.ProductRepository;
+import com.amazon.payment_service.Exception.ProductNotFoundException;
+import com.amazon.payment_service.dto.ProductRequest;
+import com.amazon.payment_service.dto.ProductResponse;
+import com.amazon.payment_service.entity.Product;
+import com.amazon.payment_service.repository.ProductRepository;
 
 @Service
 public class ProductService {
@@ -49,7 +49,7 @@ public class ProductService {
 	}
 
 	public String deactivateProduct(Long ProductID) {
-		Product product = new Product();
+		Product product = productRepository.findById(ProductID).orElseThrow(() -> new ProductNotFoundException("product not found with id : " + ProductID));
 		product.setActive(false);
 
 		productRepository.save(product);

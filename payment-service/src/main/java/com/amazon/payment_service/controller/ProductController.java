@@ -1,7 +1,8 @@
-package com.amazon.Order.controller;
+package com.amazon.payment_service.controller;
 
 import java.util.List;
 
+import com.amazon.payment_service.entity.Product;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,20 +10,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.amazon.Order.dto.ProductRequest;
-import com.amazon.Order.dto.ProductResponse;
-import com.amazon.Order.entity.Product;
-import com.amazon.Order.repository.ProductRepository;
-import com.amazon.Order.service.ProductService;
+import com.amazon.payment_service.dto.ProductRequest;
+import com.amazon.payment_service.dto.ProductResponse;
+import com.amazon.payment_service.service.ProductService;
 
 @RestController
 @RequestMapping("/product")
 public class ProductController {
 	
 	private final ProductService productService;
+
 	public ProductController(ProductService productService) {
 		this.productService=productService;
-	}
+    }
 	
 	@GetMapping
 	public List<Product> getProduct()
@@ -39,6 +39,8 @@ public class ProductController {
 	@PostMapping("/{productId}")
 	public Product findById(@PathVariable Long productId) 
 	{
+		System.out.println("inside product controller - findById -start");
+
 		return productService.findById(productId);
 	}
 	

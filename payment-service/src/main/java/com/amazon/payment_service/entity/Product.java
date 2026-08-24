@@ -1,4 +1,4 @@
-package com.amazon.Order.entity;
+package com.amazon.payment_service.entity;
 
 import java.math.BigDecimal;
 
