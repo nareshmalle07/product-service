@@ -3,6 +3,7 @@ package com.amazon.payment_service.controller;
 import java.util.List;
 
 import com.amazon.payment_service.entity.Product;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,9 +38,15 @@ public class ProductController {
 	}
 	
 	@PostMapping("/{productId}")
-	public Product findById(@PathVariable Long productId) 
+	public Product findById(@PathVariable Long productId, HttpServletRequest servletRequest)
 	{
+//		System.out.println("inside product controller - findById -start");
+
+//		System.out.println("inside product controller "+servletRequest.getHeader("X-Correlation-ID"));
+
 		System.out.println("inside product controller - findById -start");
+
+		System.out.println("inside product controller - Correlation ID = " + servletRequest.getHeader("X-Correlation-ID"));
 
 		return productService.findById(productId);
 	}
